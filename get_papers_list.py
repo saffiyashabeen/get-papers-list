@@ -130,11 +130,16 @@ def main(
         raise typer.Exit()
 
     paper_details = fetch_paper_details(paper_ids, debug)
-    processed_papers = [detect_non_academic_authors(paper) for paper in paper_details]
+    processed_papers = []
+    for paper in paper_details:
+        detected = detect_non_academic_authors(paper)
+        if detected["Company Affiliation(s)"]:  # ✅ Filter to include only pharma/biotech
+            processed_papers.append(detected)
+
+    if not processed_papers:
+        typer.echo("No papers with pharmaceutical/biotech affiliations found.")
+        raise typer.Exit()
 
     export_to_csv(processed_papers, file)
     typer.echo(f"Results exported to {file}")
 
-
-if __name__ == "__main__":
-    app()
