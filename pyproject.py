@@ -5,9 +5,7 @@ description = "Fetch PubMed papers with pharma/biotech authors and export to CSV
 authors = ["saffiyashabeen <saffiyashabeen@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [
-  { include = "get_papers_list" }
-]
+packages = [{ include = "get_papers_list" }]
 
 [tool.poetry.dependencies]
 python = ">=3.12"
@@ -21,6 +19,7 @@ typer = "^0.16.0"
 get-papers-list = "get_papers_list.cli:app"
 
 [tool.poetry.group.dev.dependencies]
+beautifulsoup4 = "^4.13.4"
 twine = "^6.1.0"
 
 [build-system]
